@@ -1,6 +1,8 @@
 package hu.flowacademy.dungeon;
 
+import hu.flowacademy.dungeon.quest.Options;
 import hu.flowacademy.dungeon.quest.Quest;
+import hu.flowacademy.dungeon.quest.QuestFactory;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,11 +10,14 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.UUID;
 import java.util.function.Function;
 
 public class GameArea {
+
+  private static final int MAX_QUEST_COUNT = 4;
 
   private List<Player> players = new ArrayList<>();
 
@@ -49,8 +54,6 @@ public class GameArea {
   }
 
   private boolean gameEnded() {
-    // TODO check players has all achievements
-    // TODO check players are the end of the enemies
     return isPlayerStoredAllAchievements() ||
         isAllPlayersDead() ||
         isEndOfTheMap();
@@ -100,7 +103,15 @@ public class GameArea {
   }
 
   private List<Quest> getRandomQuests() {
-    return List.of();
+    List<Quest> responseList = new ArrayList<>();
+    int questCount = new Random().nextInt(MAX_QUEST_COUNT);
+    for (int i = 0; i < questCount; i++) {
+      Quest quest = Constants.quests.get(
+          new Random().nextInt(Constants.quests.size())
+      );
+      responseList.add(quest);
+    }
+    return responseList;
   }
 
   private void readPlayers() throws IOException {
@@ -122,34 +133,6 @@ public class GameArea {
         .sorted()
         .forEach(System.out::println);
 
-  }
-
-  private static void scanFromConsole() {
-    Scanner scanner = new Scanner(System.in);
-
-    var username = scanner.nextLine();
-
-    System.out.println("Your name is " + username + "! THanks!");
-
-    System.out.println("Tell me your age!");
-
-    int age = scanner.nextInt();
-
-    System.out.println(age < 12 ? "Play with your toys!" : "Too old!");
-  }
-
-  private static void readFromConsole() throws IOException {
-    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-
-    String line;
-    int i = 0;
-
-    while ((line = bufferedReader.readLine()) != null) {
-      if ("q".equalsIgnoreCase(line)) {
-        System.exit(0);
-      }
-      System.out.println(i++ + " line >> " + line);
-    }
   }
 
 }

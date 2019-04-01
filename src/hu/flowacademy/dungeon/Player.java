@@ -2,6 +2,7 @@ package hu.flowacademy.dungeon;
 
 import hu.flowacademy.dungeon.badge.AbstractBadge;
 import hu.flowacademy.dungeon.badge.Achievement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -25,7 +26,7 @@ public class Player {
     this.killed = killed;
   }
 
-  private List<AbstractBadge> badges;
+  private List<AbstractBadge> badges = new ArrayList<>();
 
   private Player(String name, int health) {
     this.name = name;
