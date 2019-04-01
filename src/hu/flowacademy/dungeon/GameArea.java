@@ -46,9 +46,14 @@ public class GameArea {
         break;
       }
 
-      // getActualPlayer
-      // getEnemyFromActualPosition
-      //
+      for (Player player: this.players) {
+        // TODO if player is dead continue
+        // TODO get enemy on players position
+        // TODO ask the quests
+        // TODO if player can resolve all quests, the next player will come
+        // TODO badges persist
+        // TODO the player's postion++
+      }
 
     }
   }
