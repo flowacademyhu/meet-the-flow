@@ -2,18 +2,15 @@ package hu.flowacademy.dungeon;
 
 import hu.flowacademy.dungeon.quest.Quest;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
+import java.util.UUID;
 import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class GameArea {
 
@@ -28,28 +25,11 @@ public class GameArea {
 
     gameArea.initDefault();
 
-    List<Player> players = List.of(new Player("Feri", true),
-        new Player("Mate", false),
-        new Player("Gyorgyi", false));
-
-    List<Boolean> list = players.stream()
-//        .filter(Predicate.not(Player::isKilled))
-//        .filter(player -> !player.isKilled())
-//        .filter(Player::isKilled)
-//        .map(Player::getName)
-        .map(Player::isKilled)
-        .filter(value -> value)
-        .collect(Collectors.toList());
-
-    Set<String> set = new HashSet<>();
-    set.add("123");
-    set.add("asd");
-    set.add("bsd");
-    set.add("123");
-
-    set.forEach(System.out::println);
-
-    gameArea.readPlayers();
+    try {
+      gameArea.readPlayers();
+    } catch (IOException | NumberFormatException e) {
+      System.err.println("Invalid input when player reading!");
+    }
 
     gameArea.mainLoop();
 
@@ -71,7 +51,39 @@ public class GameArea {
   private boolean gameEnded() {
     // TODO check players has all achievements
     // TODO check players are the end of the enemies
-    return true;
+    return isPlayerStoredAllAchievements() ||
+        isAllPlayersDead() ||
+        isEndOfTheMap();
+  }
+
+  private boolean isEndOfTheMap() {
+    for (Player p: players) {
+      if (p.getPosition() == map.size()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private boolean isAllPlayersDead() {
+//    for (Player p: players) {
+//      if (!p.isKilled()) {
+//        return false;
+//      }
+//    }
+//    return true;
+    return players.stream().allMatch(Player::isKilled);
+  }
+
+  private boolean isPlayerStoredAllAchievements() {
+//    for (Player p: players) {
+//      if (p.hasAllAchievements()) {
+//        return true;
+//      }
+//    }
+//    return false;
+    return players.stream()
+        .anyMatch(Player::hasAllAchievements);
   }
 
   private void initDefault() {
@@ -91,8 +103,25 @@ public class GameArea {
     return List.of();
   }
 
-  private void readPlayers() {
-    // TODO read players
+  private void readPlayers() throws IOException {
+    System.out.println("How many players will be play?");
+    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    String line = bufferedReader.readLine();
+    Integer palyersCount = Integer.valueOf(line);
+
+    for (int i = 0; i < palyersCount; i++) {
+      System.out.println(i + " username is: ");
+      String username = bufferedReader.readLine();
+      players.add(new Player(username, false));
+    }
+
+    System.out.println("Users in the list:");
+
+    players.stream()
+        .map(Player::getName)
+        .sorted()
+        .forEach(System.out::println);
+
   }
 
   private static void scanFromConsole() {
