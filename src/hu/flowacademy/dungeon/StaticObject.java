@@ -8,4 +8,9 @@ public class StaticObject extends AbstractEnemy {
   public StaticObject(String name, List<Quest> quests) {
     super(name, quests);
   }
+
+  @Override
+  public int compareTo(AbstractEnemy o) {
+    return super.compareTo(o);
+  }
 }

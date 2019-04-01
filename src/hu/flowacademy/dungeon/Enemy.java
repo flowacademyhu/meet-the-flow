@@ -19,4 +19,9 @@ public class Enemy extends AbstractEnemy {
   public void setDamage(int damage) {
     this.damage = damage;
   }
+
+  @Override
+  public int compareTo(AbstractEnemy o) {
+    return super.compareTo(o);
+  }
 }

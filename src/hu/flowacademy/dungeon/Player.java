@@ -15,6 +15,16 @@ public class Player {
 
   private int position;
 
+  private boolean killed;
+
+  public boolean isKilled() {
+    return killed;
+  }
+
+  public void setKilled(boolean killed) {
+    this.killed = killed;
+  }
+
   private List<AbstractBadge> badges;
 
   private Player(String name, int health) {
@@ -32,8 +42,9 @@ public class Player {
     return counter == MAX_ACHIEVEMENTS;
   }
 
-  public Player(String name) {
+  public Player(String name, boolean killed) {
     this(name, DEFAULT_HEALTH);
+    this.killed = killed;
   }
 
   public String getName() {

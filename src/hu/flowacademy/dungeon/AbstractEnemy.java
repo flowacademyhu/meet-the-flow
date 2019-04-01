@@ -3,7 +3,7 @@ package hu.flowacademy.dungeon;
 import hu.flowacademy.dungeon.quest.Quest;
 import java.util.List;
 
-public abstract class AbstractEnemy {
+public abstract class AbstractEnemy implements Comparable<AbstractEnemy> {
 
   private String name;
 
@@ -30,5 +30,15 @@ public abstract class AbstractEnemy {
 
   public void setQuests(List<Quest> quests) {
     this.quests = quests;
+  }
+
+  @Override
+  public int compareTo(AbstractEnemy o) {
+    return o.name.charAt(0) > this.name.charAt(0) ? -1 : 1;
+  }
+
+  @Override
+  public String toString() {
+    return this.name;
   }
 }
