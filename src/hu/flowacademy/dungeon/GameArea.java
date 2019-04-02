@@ -83,8 +83,6 @@ public class GameArea {
 
       int index = scanInt();
 
-
-      // TODO watch me
       Options option = quest.getOption(index);
       while (option == null) {
         index = scanInt();
@@ -135,22 +133,10 @@ public class GameArea {
   }
 
   private boolean isAllPlayersDead() {
-//    for (Player p: players) {
-//      if (!p.isKilled()) {
-//        return false;
-//      }
-//    }
-//    return true;
     return players.stream().allMatch(Player::isKilled);
   }
 
   private boolean isPlayerStoredAllAchievements() {
-//    for (Player p: players) {
-//      if (p.hasAllAchievements()) {
-//        return true;
-//      }
-//    }
-//    return false;
     return players.stream()
         .anyMatch(Player::hasAllAchievements);
   }
@@ -198,8 +184,6 @@ public class GameArea {
         .map(Player::getName)
         .sorted()
         .forEach(System.out::println);
-
-//    bufferedReader.close();
 
   }
 

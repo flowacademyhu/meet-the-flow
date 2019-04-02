@@ -4,9 +4,12 @@ public class Boost extends AbstractBadge {
 
   private int value;
 
-  public Boost(int value) {
-    super(0);
-    this.value = value;
+  private BoostType type;
+
+  public Boost(BoostType type) {
+    super(BoostType.ZERO.getValue());
+    this.type = type;
+    this.value = type.getValue();
   }
 
   public int getValue() {
@@ -15,5 +18,13 @@ public class Boost extends AbstractBadge {
 
   public void setValue(int value) {
     this.value = value;
+  }
+
+  public BoostType getType() {
+    return type;
+  }
+
+  public void setType(BoostType type) {
+    this.type = type;
   }
 }

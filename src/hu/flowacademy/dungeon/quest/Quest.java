@@ -12,6 +12,10 @@ public class Quest {
 
   // TODO private int level; // for quest level
 
+
+  public Quest() {
+  }
+
   public Quest(String question, Options rightOption,
       List<Options> options) {
     this.question = question;
