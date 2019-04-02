@@ -42,4 +42,14 @@ public class Quest {
   public void setOptions(List<Options> options) {
     this.options = options;
   }
+
+  public Options getOption(int index) {
+    try {
+      return this.options.get(index - 1);
+    } catch (IndexOutOfBoundsException e) {
+      System.err.println("Input was not a number!");
+      return null;
+    }
+
+  }
 }

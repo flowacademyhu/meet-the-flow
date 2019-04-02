@@ -20,6 +20,8 @@ public abstract class QuestFactory {
               .collect(Collectors.toList())
       );
     }
+
+    optionList.sort((item1, item2) -> item1.getOption().compareToIgnoreCase(item2.getOption()));
     return new Quest(question, rightOption, optionList);
   }
 

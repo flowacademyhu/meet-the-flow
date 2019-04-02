@@ -79,4 +79,25 @@ public class Player {
   public void setBadges(List<AbstractBadge> badges) {
     this.badges = badges;
   }
+
+  public void minusHp(int minus) {
+    System.out.printf("%s's health is: %d after got damage: %d\n", this.name, this.health, (this.health - minus));
+    if (this.health - minus <= 0) {
+      this.health = 0;
+      this.killed = true;
+      return;
+    }
+    this.health -= minus;
+  }
+
+  public void plusHp(int plus) {
+    if (this.killed) {
+      return;
+    }
+    this.health += plus;
+  }
+
+  public void incrementPosition() {
+    this.position++;
+  }
 }
