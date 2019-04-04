@@ -1,6 +1,10 @@
 package hu.flowacademy.dungeon.badge;
 
-public class Boost extends AbstractBadge {
+import hu.flowacademy.dungeon.persistence.Saveable;
+import java.io.Serializable;
+import java.util.Map;
+
+public class Boost extends AbstractBadge implements Saveable {
 
   private int value;
 
@@ -26,5 +30,10 @@ public class Boost extends AbstractBadge {
 
   public void setType(BoostType type) {
     this.type = type;
+  }
+
+  @Override
+  public Map<String, ? extends Serializable> getSaveables() {
+    return Map.of("value", this.value, "type", this.type, "point", this.getPoint());
   }
 }

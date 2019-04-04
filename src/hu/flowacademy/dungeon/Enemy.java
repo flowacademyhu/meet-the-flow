@@ -1,9 +1,12 @@
 package hu.flowacademy.dungeon;
 
+import hu.flowacademy.dungeon.persistence.Saveable;
 import hu.flowacademy.dungeon.quest.Quest;
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
-public class Enemy extends AbstractEnemy {
+public class Enemy extends AbstractEnemy implements Saveable {
 
   private int damage;
 
@@ -23,5 +26,10 @@ public class Enemy extends AbstractEnemy {
   @Override
   public int compareTo(AbstractEnemy o) {
     return super.compareTo(o);
+  }
+
+  @Override
+  public Map<String, ? extends Serializable> getSaveables() {
+    return Map.of("damage", this.damage, "name", this.getName());
   }
 }
