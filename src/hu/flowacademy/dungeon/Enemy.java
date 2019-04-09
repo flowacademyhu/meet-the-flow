@@ -32,4 +32,13 @@ public class Enemy extends AbstractEnemy implements Saveable {
   public Map<String, ? extends Serializable> getSaveables() {
     return Map.of("damage", this.damage, "name", this.getName());
   }
+
+  @Override
+  public boolean equals(Saveable saveable) {
+    if (saveable instanceof Enemy) {
+      var enemy = (Enemy) saveable;
+      return enemy.getName().equalsIgnoreCase(this.getName());
+    }
+    return false;
+  }
 }

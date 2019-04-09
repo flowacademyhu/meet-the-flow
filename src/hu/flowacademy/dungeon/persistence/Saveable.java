@@ -7,4 +7,6 @@ public interface Saveable extends Serializable {
 
   Map<String, ? extends Serializable> getSaveables();
 
+  boolean equals(Saveable saveable);
+
 }

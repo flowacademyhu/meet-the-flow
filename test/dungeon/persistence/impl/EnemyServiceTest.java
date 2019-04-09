@@ -26,5 +26,12 @@ public class EnemyServiceTest {
     Assertions.assertNotEquals(0, enemies.size());
   }
 
+  @Test
+  public void testUpdate() {
+    this.enemy.setDamage(400);
+    Enemy savedEnemy = enemyCrudService.update(this.enemy);
+    Assertions.assertNotNull(savedEnemy);
+  }
+
 
 }

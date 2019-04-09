@@ -36,4 +36,9 @@ public class Boost extends AbstractBadge implements Saveable {
   public Map<String, ? extends Serializable> getSaveables() {
     return Map.of("value", this.value, "type", this.type, "point", this.getPoint());
   }
+
+  @Override
+  public boolean equals(Saveable saveable) {
+    return equals(saveable);
+  }
 }

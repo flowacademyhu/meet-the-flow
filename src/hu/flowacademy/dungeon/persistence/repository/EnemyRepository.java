@@ -10,8 +10,8 @@ public class EnemyRepository extends AbstractRepository<Enemy> {
   @Override
   protected List<Enemy> convertList(List<String> fileContent) {
     List<Enemy> enemies = new ArrayList<>();
+    Enemy enemy = null;
     for (String line: fileContent) {
-      Enemy enemy = null;
       if (line.startsWith("damage:")) {
         Integer damage = Integer.valueOf(getValue("damage:", line));
         if (enemy == null){

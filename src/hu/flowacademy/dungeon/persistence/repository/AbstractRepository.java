@@ -8,6 +8,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -47,7 +48,20 @@ public abstract class AbstractRepository<M extends Saveable> {
   }
 
   public M update(M model) {
+    List<M> models = this.read((Class<M>) model.getClass());
+    List<M> changedModels = models.stream().peek(item -> {
+      if (item.equals(model)) {
+        item = model;
+      }
+      return;
+    }).collect(Collectors.toList());
+    System.err.println(changedModels);
+    save(changedModels);
     return model;
+  }
+
+  private void save(List<M> changedModels) {
+
   }
 
   public List<M> read(Class<M> mClass) {
