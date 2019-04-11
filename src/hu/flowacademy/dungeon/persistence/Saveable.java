@@ -5,7 +5,7 @@ import java.util.Map;
 
 public interface Saveable extends Serializable {
 
-  Map<String, ? extends Serializable> getSaveables();
+  Map<String, ?> getSaveables();
 
   boolean equals(Saveable saveable);
 

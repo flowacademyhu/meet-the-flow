@@ -34,7 +34,16 @@ public abstract class AbstractEnemy implements Comparable<AbstractEnemy> {
 
   @Override
   public int compareTo(AbstractEnemy o) {
-    return o.name.charAt(0) > this.name.charAt(0) ? -1 : 1;
+    if (this.equals(o) || o.name.charAt(0) == this.name.charAt(0)) {
+      return 0;
+    } else {
+      if (o.name.charAt(0) > this.name.charAt(0)) {
+        return -1;
+      } else {
+        return 1;
+      }
+    }
+//    return this.equals(o) ? 0 : o.name.charAt(0) > this.name.charAt(0) ? -1 : 1;
   }
 
   @Override

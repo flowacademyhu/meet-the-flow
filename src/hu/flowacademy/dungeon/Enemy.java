@@ -3,6 +3,7 @@ package hu.flowacademy.dungeon;
 import hu.flowacademy.dungeon.persistence.Saveable;
 import hu.flowacademy.dungeon.quest.Quest;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +30,7 @@ public class Enemy extends AbstractEnemy implements Saveable {
   }
 
   @Override
-  public Map<String, ? extends Serializable> getSaveables() {
+  public Map<String, ?> getSaveables() {
     return Map.of("damage", this.damage, "name", this.getName());
   }
 
